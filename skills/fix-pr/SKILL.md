@@ -380,8 +380,8 @@ For each group of related change requests, in order:
 2. Verify the suggestion is technically correct for this codebase (see mindset
    sections above). Push back if warranted — do not blindly implement.
 3. Implement the requested change(s) — and **only** those changes.
-4. Invoke the `/kata:commit` skill with the `!` flag, passing the change request
-   context as the argument.
+4. Invoke the `/kata:commit` skill with the `!` flag, passing the change
+   request context as the argument.
 5. Record the resulting commit SHA alongside the group (you will need it in
    step 4c). Mark the corresponding `TodoWrite` task as completed. Then
    **immediately continue to the next group** — do not push yet.

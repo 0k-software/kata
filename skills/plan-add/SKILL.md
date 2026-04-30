@@ -4,8 +4,8 @@ description: Add a new step to an existing PLAN.md
 ---
 
 Before proceeding, read the shared format definition at
-`references/PLAN_FORMAT.md` (relative to the plugin root). Use the `Read`
-tool on that file to learn the PLAN.md structure.
+`references/PLAN_FORMAT.md` (relative to the plugin root). Use the `Read` tool
+on that file to learn the PLAN.md structure.
 
 ---
 

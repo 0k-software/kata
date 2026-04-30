@@ -6,8 +6,8 @@ description:
 ---
 
 Before proceeding, read the shared format definition at
-`references/PLAN_FORMAT.md` (relative to the plugin root). Use the `Read`
-tool on that file to learn the PLAN.md structure.
+`references/PLAN_FORMAT.md` (relative to the plugin root). Use the `Read` tool
+on that file to learn the PLAN.md structure.
 
 ---
 
@@ -112,10 +112,10 @@ finalizing:
    grouping and ask the user to confirm or adjust.
 2. **Trim PLAN.md** to contain only the first group's steps.
 3. **Create a follow-up GitHub issue** for each remaining group using
-   `/kata:create-issue`. Include enough context for a future implementer and link
-   back to the original issue. If a group depends on a previous group being
-   complete, set the "Blocked by" relation in GitHub to the preceding issue so
-   implementation order is clear.
+   `/kata:create-issue`. Include enough context for a future implementer and
+   link back to the original issue. If a group depends on a previous group
+   being complete, set the "Blocked by" relation in GitHub to the preceding
+   issue so implementation order is clear.
 4. **Update the original issue** to reflect its now-smaller scope:
    - Edit the issue body so it describes only what this first group covers.
    - Leave a comment on the issue listing the extracted follow-up issues with
