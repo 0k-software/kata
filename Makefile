@@ -11,11 +11,17 @@ setup: plugins
 	@echo "Installed git hooks from .git-hooks/"
 
 # Ensure plugins enabled in .claude/settings.json are actually installed.
-# extraKnownMarketplaces registers a marketplace, but plugins still need to
-# be installed from it before their skills resolve.
+# The harness registers extraKnownMarketplaces lazily (after SessionStart
+# hooks fire), so we register the marketplace ourselves before installing —
+# otherwise `claude plugin install` errors with "not found in marketplace".
 .PHONY: plugins
 plugins:
 	@if command -v claude >/dev/null 2>&1; then \
+		known="$${CLAUDE_CONFIG_DIR:-$$HOME/.claude}/plugins/known_marketplaces.json"; \
+		if ! jq -e '."0k-plugins"' "$$known" >/dev/null 2>&1; then \
+			echo "Registering 0k-plugins marketplace..."; \
+			claude plugin marketplace add 0k-software/0k-plugins; \
+		fi; \
 		installed="$${CLAUDE_CONFIG_DIR:-$$HOME/.claude}/plugins/installed_plugins.json"; \
 		if ! jq -e '.plugins["kata@0k-plugins"]' "$$installed" >/dev/null 2>&1; then \
 			echo "Installing kata@0k-plugins..."; \
