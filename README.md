@@ -129,10 +129,15 @@ Static reference material consumed by skills lives under `references/`:
 ├── .github/workflows/
 │   └── check.yml            CI: prettier markdown check
 ├── .prettierrc.yml          markdown formatting rules
-├── Makefile                 release target
+├── Makefile                 setup / release targets
+├── .git-hooks/
+│   └── pre-commit           runs the same checks as CI; installed by `make setup`
 ├── bin/
 │   └── sync-plugin          stages plugin content under .claude/plugins/kata/
-├── .claude/plugins/kata/    staged plugin copy (committed; plugin content only)
+├── .claude/
+│   ├── settings.json        SessionStart hook → `make setup`
+│   ├── hooks/session-start.sh
+│   └── plugins/kata/        staged plugin copy (committed; plugin content only)
 ├── references/
 │   ├── PLAN_FORMAT.md       PLAN.md schema used by plan-* skills
 │   └── templates/           1-pitch.yml … 6-kickoff.yml
@@ -181,6 +186,18 @@ bin/sync-plugin
 
 CI runs `bin/sync-plugin --check` to keep the two in sync — a drift fails the
 build.
+
+### Pre-commit hook
+
+After cloning, install the repo-managed git hooks once:
+
+```sh
+make setup
+```
+
+This copies `.git-hooks/pre-commit` into `.git/hooks/`, so every commit runs
+the same checks as CI (prettier + `bin/sync-plugin --check`). Claude Code
+sessions in this repo run `make setup` automatically on start.
 
 ### Local checks
 

@@ -15,10 +15,10 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 STAGE_DIR="$ROOT/.claude/plugins/kata"
 
 # Top-level entries to skip when staging. Anything not in the plugin proper:
-# repo metadata (.git), the stage dir itself (.claude — would recurse), CI
-# config (.github), dev tooling (bin, Makefile, .prettierrc.yml), and the
-# legacy local-dev marketplace (dev, kept for safety even after removal).
-SKIP=(.git .claude .github bin dev Makefile .prettierrc.yml)
+# repo metadata (.git, .git-hooks), the stage dir itself (.claude — would
+# recurse), CI config (.github), dev tooling (bin, Makefile, .prettierrc.yml),
+# and the legacy local-dev marketplace (dev, kept for safety even after removal).
+SKIP=(.git .git-hooks .claude .github bin dev Makefile .prettierrc.yml)
 
 sync_stage() {
   local dest="$1"
