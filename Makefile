@@ -1,9 +1,12 @@
 PLUGIN_VERSION := $(shell jq -r '.version' .claude-plugin/plugin.json 2>/dev/null)
 
+.PHONY: setup
+setup: git-hooks install-plugins
+
 # Install repo-managed git hooks from .git-hooks/ into the local .git/hooks/
 # directory. Idempotent — safe to re-run; copies overwrite previous installs.
-.PHONY: setup
-setup: plugins
+.PHONY: git-hooks
+git-hooks:
 	@test -d .git || { echo "error: not a git working tree"; exit 1; }
 	@for hook in .git-hooks/*; do \
 		install -m 755 "$$hook" ".git/hooks/$$(basename $$hook)"; \
@@ -14,8 +17,8 @@ setup: plugins
 # The harness registers extraKnownMarketplaces lazily (after SessionStart
 # hooks fire), so we register the marketplace ourselves before installing —
 # otherwise `claude plugin install` errors with "not found in marketplace".
-.PHONY: plugins
-plugins:
+.PHONY: install-plugins
+install-plugins:
 	@if command -v claude >/dev/null 2>&1; then \
 		known="$${CLAUDE_CONFIG_DIR:-$$HOME/.claude}/plugins/known_marketplaces.json"; \
 		if ! jq -e '."0k-plugins"' "$$known" >/dev/null 2>&1; then \
