@@ -101,7 +101,7 @@ plan-init.
 **Understanding the idea:**
 
 - Fetch the issue (title, body, issue type) and load the matching type template
-  from `0k/references/templates/`. The issue title and body are the primary
+  from `references/templates/`. The issue title and body are the primary
   description of what is being built — they set the starting scope and intent
   for everything that follows. After fetching, apply the `in progress` label:
 

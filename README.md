@@ -19,16 +19,16 @@ From any Claude Code session, register the marketplace and install:
 
 ```
 /plugin marketplace add 0k-software/kata
-/plugin install 0k@0k-software
+/plugin install 0k@kata
 ```
 
 Once installed, every skill is available as `/0k:<skill-name>`.
 
-| Action      | Command                          |
-| ----------- | -------------------------------- |
-| Update      | `/plugin update 0k@0k-software`  |
-| Uninstall   | `/plugin uninstall 0k@0k-software` |
-| List skills | `/plugin info 0k@0k-software`    |
+| Action      | Command                       |
+| ----------- | ----------------------------- |
+| Update      | `/plugin update 0k@kata`      |
+| Uninstall   | `/plugin uninstall 0k@kata`   |
+| List skills | `/plugin info 0k@kata`        |
 
 ### Enabling across an org's projects
 
@@ -38,7 +38,7 @@ and auto-enable the plugin for everyone who opens the project:
 ```json
 {
   "extraKnownMarketplaces": {
-    "0k-software": {
+    "kata": {
       "source": {
         "source": "github",
         "repo": "0k-software/kata"
@@ -46,7 +46,7 @@ and auto-enable the plugin for everyone who opens the project:
     }
   },
   "enabledPlugins": {
-    "0k@0k-software": true
+    "0k@kata": true
   }
 }
 ```

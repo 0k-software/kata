@@ -10,9 +10,9 @@ Address all **unresolved** feedback on a pull request or GitHub issue.
 
 `$ARGUMENTS` is a PR number, issue number, PR URL, or issue URL.
 
-- If the argument contains `/pull/` → read `0k/skills/fix-pr/SKILL.md` and
+- If the argument contains `/pull/` → read `skills/fix-pr/SKILL.md` and
   follow it, using `$ARGUMENTS` as the input.
-- If the argument contains `/issues/` → read `0k/skills/fix-issue/SKILL.md` and
+- If the argument contains `/issues/` → read `skills/fix-issue/SKILL.md` and
   follow it, using `$ARGUMENTS` as the input.
 - If the argument is a **bare number** → check whether it identifies a pull
   request:
@@ -27,7 +27,7 @@ Address all **unresolved** feedback on a pull request or GitHub issue.
     | jq '{number: .number, message: .message}'
   ```
 
-  If `.number` is non-null → read `0k/skills/fix-pr/SKILL.md` and follow it. If
+  If `.number` is non-null → read `skills/fix-pr/SKILL.md` and follow it. If
   `.number` is null, report the `message` from the response and ask the user to
   specify whether the argument is a PR or an issue number.
 
@@ -49,12 +49,12 @@ Address all **unresolved** feedback on a pull request or GitHub issue.
      If the curl fails, fall back to inferring from the current conversation
      context or ask the user.
 
-     If a PR number is returned, read `0k/skills/fix-pr/SKILL.md` and follow
+     If a PR number is returned, read `skills/fix-pr/SKILL.md` and follow
      it.
 
   2. Otherwise, try to infer the relevant issue from the current conversation
      context — if an issue was recently refined, discussed, or is the explicit
      subject of this session, use that issue number and read
-     `0k/skills/fix-issue/SKILL.md`.
+     `skills/fix-issue/SKILL.md`.
   3. If nothing can be inferred, ask the user to provide an issue number or
      URL.

@@ -19,7 +19,7 @@ standardized templates. Do NOT create free-form issues.
    git remote (look for an `0k-software/` remote). If the current directory is
    not an 0k-software repo, ask the user which repo to use.
 3. **Determine the issue type** from the description. Read all template files
-   in `0k/references/templates/` — each file's `name` and `description` fields
+   in `references/templates/` — each file's `name` and `description` fields
    describe the issue type it covers. Match the user's intent to the best
    fitting template. If ambiguous, present the user with the options and ask
    them to pick.
