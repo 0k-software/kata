@@ -1,15 +1,4 @@
 {
-  "extraKnownMarketplaces": {
-    "local-plugins": {
-      "source": {
-        "source": "directory",
-        "path": "marketplace"
-      }
-    }
-  },
-  "enabledPlugins": {
-    "kata@local-plugins": true
-  },
   "hooks": {
     "SessionStart": [
       {
