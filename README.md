@@ -125,10 +125,8 @@ there, not here.
 ├── Makefile                 setup / release targets
 ├── .git-hooks/
 │   └── pre-commit           runs the same checks as CI; installed by `make setup`
-├── marketplace/
-│   └── .claude-plugin/marketplace.json   local marketplace pointing at the repo root
 ├── .claude/
-│   ├── settings.json        registers the local marketplace and SessionStart hook
+│   ├── settings.json        SessionStart hook → `make setup`
 │   └── hooks/session-start.sh
 ├── references/
 │   └── PLAN_FORMAT.md       PLAN.md schema used by plan-* skills
@@ -164,14 +162,6 @@ trigger-rich.
 Local install lives in the [`0k-software/0k-plugins`][0k-plugins] marketplace
 repo — clone it alongside this one and follow its instructions to install a
 `kata-dev` variant from your working copy.
-
-### Local marketplace
-
-A local marketplace lives at `marketplace/.claude-plugin/marketplace.json` and
-points back to the repo root (which is itself the kata plugin).
-`.claude/settings.json` registers it and enables `kata@local-plugins`, so
-Claude Code running inside this repo discovers the kata skills directly from
-the source tree — no build step or staged copy.
 
 ### Pre-commit hook
 
