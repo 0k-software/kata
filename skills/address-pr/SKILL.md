@@ -5,5 +5,5 @@ description:
 argument-hint: "{ PR number or URL }"
 ---
 
-Alias for `/fix-pr`. Read `skills/fix-pr/SKILL.md` and follow it exactly,
-using `$ARGUMENTS` as the input.
+Alias for `/fix-pr`. Read `skills/fix-pr/SKILL.md` and follow it exactly, using
+`$ARGUMENTS` as the input.

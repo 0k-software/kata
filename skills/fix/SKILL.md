@@ -10,8 +10,8 @@ Address all **unresolved** feedback on a pull request or GitHub issue.
 
 `$ARGUMENTS` is a PR number, issue number, PR URL, or issue URL.
 
-- If the argument contains `/pull/` → read `skills/fix-pr/SKILL.md` and
-  follow it, using `$ARGUMENTS` as the input.
+- If the argument contains `/pull/` → read `skills/fix-pr/SKILL.md` and follow
+  it, using `$ARGUMENTS` as the input.
 - If the argument contains `/issues/` → read `skills/fix-issue/SKILL.md` and
   follow it, using `$ARGUMENTS` as the input.
 - If the argument is a **bare number** → check whether it identifies a pull
@@ -49,8 +49,7 @@ Address all **unresolved** feedback on a pull request or GitHub issue.
      If the curl fails, fall back to inferring from the current conversation
      context or ask the user.
 
-     If a PR number is returned, read `skills/fix-pr/SKILL.md` and follow
-     it.
+     If a PR number is returned, read `skills/fix-pr/SKILL.md` and follow it.
 
   2. Otherwise, try to infer the relevant issue from the current conversation
      context — if an issue was recently refined, discussed, or is the explicit
