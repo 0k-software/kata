@@ -1,0 +1,13 @@
+#!/bin/bash
+# Pre-commit hook: runs the same checks as CI (.github/workflows/check.yml).
+# Installed via `make setup`.
+
+set -euo pipefail
+
+cd "$(git rev-parse --show-toplevel)"
+
+echo "==> prettier --check"
+npx --yes prettier@3.8.1 --check "**/*.md"
+
+echo "==> bin/sync-plugin --check"
+bin/sync-plugin --check

@@ -1,5 +1,15 @@
 PLUGIN_VERSION := $(shell jq -r '.version' .claude-plugin/plugin.json 2>/dev/null)
 
+# Install repo-managed git hooks from .git-hooks/ into the local .git/hooks/
+# directory. Idempotent — safe to re-run; copies overwrite previous installs.
+.PHONY: setup
+setup:
+	@test -d .git || { echo "error: not a git working tree"; exit 1; }
+	@for hook in .git-hooks/*; do \
+		install -m 755 "$$hook" ".git/hooks/$$(basename $$hook)"; \
+	done
+	@echo "Installed git hooks from .git-hooks/"
+
 .PHONY: release
 release:
 	@test -n "$(PLUGIN_VERSION)" || { echo "error: could not read version from .claude-plugin/plugin.json"; exit 1; }
