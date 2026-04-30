@@ -3,8 +3,23 @@ DEV_PLUGIN_NAME := kata-dev
 DEV_MARKETPLACE_NAME := 0k-software-dev
 DEV_MARKETPLACE_DIR := dev
 
+PLUGIN_STAGE_DIR := .claude/plugins/$(PLUGIN_NAME)
+
 .PHONY: all
 all: install-plugin
+
+# Stage the plugin contents under .claude/plugins/<name>/ so Claude Code can
+# discover the kata skills inside this session. Excludes .git and .claude
+# itself to avoid recursion. Idempotent — safe to re-run.
+.PHONY: setup
+setup:
+	@rm -rf $(PLUGIN_STAGE_DIR)
+	@mkdir -p $(PLUGIN_STAGE_DIR)
+	@find . -mindepth 1 -maxdepth 1 \
+		-not -name '.git' \
+		-not -name '.claude' \
+		-exec cp -a {} $(PLUGIN_STAGE_DIR)/ \;
+	@echo "Staged plugin contents at $(PLUGIN_STAGE_DIR)/"
 
 # Installs from the local working copy under a separate
 # `kata-dev@0k-software-dev` identity so it never clobbers a developer's
