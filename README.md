@@ -125,12 +125,11 @@ there, not here.
 ├── Makefile                 setup / release targets
 ├── .git-hooks/
 │   └── pre-commit           runs the same checks as CI; installed by `make setup`
-├── bin/
-│   └── sync-plugin          stages plugin content under .claude/plugins/kata/
+├── marketplace/
+│   └── .claude-plugin/marketplace.json   local marketplace pointing at the repo root
 ├── .claude/
-│   ├── settings.json        SessionStart hook → `make setup`
-│   ├── hooks/session-start.sh
-│   └── plugins/kata/        staged plugin copy (committed; plugin content only)
+│   ├── settings.json        registers the local marketplace and SessionStart hook
+│   └── hooks/session-start.sh
 ├── references/
 │   └── PLAN_FORMAT.md       PLAN.md schema used by plan-* skills
 └── skills/
@@ -166,18 +165,13 @@ Local install lives in the [`0k-software/0k-plugins`][0k-plugins] marketplace
 repo — clone it alongside this one and follow its instructions to install a
 `kata-dev` variant from your working copy.
 
-### Staged plugin copy
+### Local marketplace
 
-A committed copy of the plugin lives at `.claude/plugins/kata/` so Claude Code
-running inside this repo can discover the kata skills without a build step.
-Whenever you change anything in the plugin source, regenerate the staged copy:
-
-```sh
-bin/sync-plugin
-```
-
-CI runs `bin/sync-plugin --check` to keep the two in sync — a drift fails the
-build.
+A local marketplace lives at `marketplace/.claude-plugin/marketplace.json` and
+points back to the repo root (which is itself the kata plugin).
+`.claude/settings.json` registers it and enables `kata@local-plugins`, so
+Claude Code running inside this repo discovers the kata skills directly from
+the source tree — no build step or staged copy.
 
 ### Pre-commit hook
 
@@ -188,8 +182,8 @@ make setup
 ```
 
 This copies `.git-hooks/pre-commit` into `.git/hooks/`, so every commit runs
-the same checks as CI (prettier + `bin/sync-plugin --check`). Claude Code
-sessions in this repo run `make setup` automatically on start.
+the same checks as CI (prettier). Claude Code sessions in this repo run
+`make setup` automatically on start.
 
 ### Local checks
 
