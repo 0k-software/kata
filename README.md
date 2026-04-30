@@ -5,29 +5,28 @@ the 0k-software development workflow — issue creation, PR review, plan-driven
 implementation, branch hygiene, and a few quality-of-life helpers.
 
 This repository **is** the plugin. Its root is the plugin root, with
-`.claude-plugin/plugin.json` declaring the manifest. Claude Code installs it
-directly from this repo via the marketplace mechanism (see
+`.claude-plugin/plugin.json` declaring the manifest. The plugin is published
+through the [`0k-software/0k-plugins`][0k-plugins] marketplace (see
 [Installing](#installing-the-plugin) below).
 
-> Previously hosted at `0k-software/.github/0k`. This repo is now the canonical
-> home; the install path has changed accordingly.
+[0k-plugins]: https://github.com/0k-software/0k-plugins
 
 ## Installing the plugin
 
 From any Claude Code session, register the marketplace and install:
 
 ```
-/plugin marketplace add 0k-software/kata
-/plugin install kata@0k-software
+/plugin marketplace add 0k-software/0k-plugins
+/plugin install kata@0k-plugins
 ```
 
 Once installed, every skill is available as `/kata:<skill-name>`.
 
-| Action      | Command                              |
-| ----------- | ------------------------------------ |
-| Update      | `/plugin update kata@0k-software`    |
-| Uninstall   | `/plugin uninstall kata@0k-software` |
-| List skills | `/plugin info kata@0k-software`      |
+| Action      | Command                             |
+| ----------- | ----------------------------------- |
+| Update      | `/plugin update kata@0k-plugins`    |
+| Uninstall   | `/plugin uninstall kata@0k-plugins` |
+| List skills | `/plugin info kata@0k-plugins`      |
 
 ### Enabling across an org's projects
 
@@ -37,15 +36,15 @@ auto-enable the plugin for everyone who opens the project:
 ```json
 {
   "extraKnownMarketplaces": {
-    "0k-software": {
+    "0k-plugins": {
       "source": {
         "source": "github",
-        "repo": "0k-software/kata"
+        "repo": "0k-software/0k-plugins"
       }
     }
   },
   "enabledPlugins": {
-    "kata@0k-software": true
+    "kata@0k-plugins": true
   }
 }
 ```
@@ -130,11 +129,10 @@ Static reference material consumed by skills lives under `references/`:
 ├── .github/workflows/
 │   └── check.yml            CI: prettier markdown check
 ├── .prettierrc.yml          markdown formatting rules
-├── Makefile                 install-plugin / uninstall-plugin / release targets
-├── dev/
-│   ├── .claude-plugin/
-│   │   └── marketplace.json local-dev marketplace (kata-dev@0k-software-dev)
-│   └── kata -> ..           symlink to repo root (the plugin source)
+├── Makefile                 release target
+├── bin/
+│   └── sync-plugin          syncs .claude/plugins/kata/ with repo root
+├── .claude/plugins/kata/    staged plugin copy (committed; in sync with root)
 ├── references/
 │   ├── PLAN_FORMAT.md       PLAN.md schema used by plan-* skills
 │   └── templates/           1-pitch.yml … 6-kickoff.yml
@@ -167,20 +165,22 @@ trigger-rich.
 
 ### Local install for development
 
-Install the plugin from your working copy under a separate
-`kata-dev@0k-software-dev` identity, so it doesn't clobber any published
-`kata@0k-software` install you may have:
+Local install lives in the [`0k-software/0k-plugins`][0k-plugins] marketplace
+repo — clone it alongside this one and follow its instructions to install a
+`kata-dev` variant from your working copy.
+
+### Staged plugin copy
+
+A committed copy of the plugin lives at `.claude/plugins/kata/` so Claude Code
+running inside this repo can discover the kata skills without a build step.
+Whenever you change anything in the plugin source, regenerate the staged copy:
 
 ```sh
-make install-plugin
+bin/sync-plugin
 ```
 
-This registers the local marketplace under `dev/` and installs `kata-dev`.
-Re-running picks up updates. To remove it:
-
-```sh
-make uninstall-plugin
-```
+CI runs `bin/sync-plugin --check` to keep the two in sync — a drift fails the
+build.
 
 ### Local checks
 
