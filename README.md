@@ -191,8 +191,11 @@ the skill — edits to `SKILL.md` are picked up on the next call.
 ## Releasing a new version
 
 1. Bump `version` in [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json)
-   and commit.
-2. Run `make release`. This validates the working tree is clean, creates and
+   and update the changelog.
+2. Open a PR with the bump and changelog updates, get it reviewed, and merge to
+   `main`.
+3. Check out `main` and pull the merged changes.
+4. Run `make release`. This validates the working tree is clean, creates and
    pushes the `v$VERSION` tag, and publishes a GitHub release with
    auto-generated notes. Claude Code picks up the new version on its next
    `/plugin update` check.
