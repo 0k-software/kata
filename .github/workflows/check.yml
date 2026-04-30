@@ -26,6 +26,3 @@ jobs:
 
       - name: Check formatting (Prettier)
         run: npx --yes prettier@3.8.1 --check "**/*.md"
-
-      - name: Check staged plugin is in sync
-        run: bin/sync-plugin --check

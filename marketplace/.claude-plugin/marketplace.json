@@ -1,0 +1,13 @@
+{
+  "name": "local-plugins",
+  "owner": {
+    "name": "0k-software"
+  },
+  "plugins": [
+    {
+      "name": "kata",
+      "source": "../",
+      "description": "Send your coding agents to the dojo to earn their belt: make them learn to fight for a better software development process."
+    }
+  ]
+}
