@@ -10,5 +10,16 @@
         ]
       }
     ]
+  },
+  "extraKnownMarketplaces": {
+    "0k-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "0k-software/0k-plugins"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "kata@0k-plugins": true
   }
 }
