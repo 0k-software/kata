@@ -112,7 +112,7 @@ finalizing:
    grouping and ask the user to confirm or adjust.
 2. **Trim PLAN.md** to contain only the first group's steps.
 3. **Create a follow-up GitHub issue** for each remaining group using
-   `/0k:create-issue`. Include enough context for a future implementer and link
+   `/kata:create-issue`. Include enough context for a future implementer and link
    back to the original issue. If a group depends on a previous group being
    complete, set the "Blocked by" relation in GitHub to the preceding issue so
    implementation order is clear.
@@ -126,8 +126,8 @@ finalizing:
 Whether the step count was ≤ 6, or the user chose A (after the scope-down steps
 above), or the user chose B:
 
-1. Run `/0k:commit ! plan: {issue title}` to commit PLAN.md.
-2. Invoke `/0k:create-pr draft {issue-number}` to push the branch and open a
+1. Run `/kata:commit ! plan: {issue title}` to commit PLAN.md.
+2. Invoke `/kata:create-pr draft {issue-number}` to push the branch and open a
    draft PR linking to the issue.
 3. Swap lifecycle labels and request a Copilot review:
 

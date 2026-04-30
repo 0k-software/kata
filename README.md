@@ -19,16 +19,16 @@ From any Claude Code session, register the marketplace and install:
 
 ```
 /plugin marketplace add 0k-software/kata
-/plugin install 0k@kata
+/plugin install kata@0k-software
 ```
 
-Once installed, every skill is available as `/0k:<skill-name>`.
+Once installed, every skill is available as `/kata:<skill-name>`.
 
-| Action      | Command                       |
-| ----------- | ----------------------------- |
-| Update      | `/plugin update 0k@kata`      |
-| Uninstall   | `/plugin uninstall 0k@kata`   |
-| List skills | `/plugin info 0k@kata`        |
+| Action      | Command                              |
+| ----------- | ------------------------------------ |
+| Update      | `/plugin update kata@0k-software`    |
+| Uninstall   | `/plugin uninstall kata@0k-software` |
+| List skills | `/plugin info kata@0k-software`      |
 
 ### Enabling across an org's projects
 
@@ -38,7 +38,7 @@ and auto-enable the plugin for everyone who opens the project:
 ```json
 {
   "extraKnownMarketplaces": {
-    "kata": {
+    "0k-software": {
       "source": {
         "source": "github",
         "repo": "0k-software/kata"
@@ -46,7 +46,7 @@ and auto-enable the plugin for everyone who opens the project:
     }
   },
   "enabledPlugins": {
-    "0k@kata": true
+    "kata@0k-software": true
   }
 }
 ```
@@ -63,19 +63,19 @@ installation and updates automatically. See the
 
 Every skill is a directory under `skills/` with a `SKILL.md` defining its
 frontmatter (name, description, argument hint) and behavior. Each skill is
-invoked from a Claude Code session as `/0k:<skill-name>`.
+invoked from a Claude Code session as `/kata:<skill-name>`.
 
 ### Workflow
 
 | Skill            | Invocation           | Purpose                                                                                                              |
 | ---------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| `commit`         | `/0k:commit`         | Stage all changes (staged, unstaged, untracked) and generate a Conventional Commit. Use `!` prefix to auto-fix errors instead of aborting. |
-| `create-issue`   | `/0k:create-issue`   | Create a GitHub issue in an 0k-software repo using the standardized templates (pitch, feature, task, bug, enhancement, kickoff). |
-| `create-pr`      | `/0k:create-pr`      | Open a pull request for the current branch with consistent formatting and automatic issue linking. Pass `draft` to open as a draft. |
-| `rebase`         | `/0k:rebase`         | Rebase current branch onto another, handling pre-commit hook failures. `/0k:rebase!` auto-resolves conflicts where safe. |
-| `cleanup-branch` | `/0k:cleanup-branch` | Squash back-and-forth, WIP, and fixup commits into a clean, reviewable history — without changing the final diff.    |
-| `split-branch`   | `/0k:split-branch`   | Split a large branch into smaller stacked branches (≤500 changed lines each) so PRs are easier to review.            |
-| `kitty`          | `/0k:kitty`          | Open or activate a [kitty](https://sw.kovidgoyal.net/kitty/) terminal in the current directory.                      |
+| `commit`         | `/kata:commit`         | Stage all changes (staged, unstaged, untracked) and generate a Conventional Commit. Use `!` prefix to auto-fix errors instead of aborting. |
+| `create-issue`   | `/kata:create-issue`   | Create a GitHub issue in an 0k-software repo using the standardized templates (pitch, feature, task, bug, enhancement, kickoff). |
+| `create-pr`      | `/kata:create-pr`      | Open a pull request for the current branch with consistent formatting and automatic issue linking. Pass `draft` to open as a draft. |
+| `rebase`         | `/kata:rebase`         | Rebase current branch onto another, handling pre-commit hook failures. `/kata:rebase!` auto-resolves conflicts where safe. |
+| `cleanup-branch` | `/kata:cleanup-branch` | Squash back-and-forth, WIP, and fixup commits into a clean, reviewable history — without changing the final diff.    |
+| `split-branch`   | `/kata:split-branch`   | Split a large branch into smaller stacked branches (≤500 changed lines each) so PRs are easier to review.            |
+| `kitty`          | `/kata:kitty`          | Open or activate a [kitty](https://sw.kovidgoyal.net/kitty/) terminal in the current directory.                      |
 
 ### Plan-driven implementation
 
@@ -86,21 +86,21 @@ reads it before acting.
 
 | Skill          | Invocation         | Purpose                                                                                  |
 | -------------- | ------------------ | ---------------------------------------------------------------------------------------- |
-| `plan-init`    | `/0k:plan-init`    | Fetch a GitHub issue, design step-by-step implementation, write `PLAN.md`, commit, and open a draft PR. |
-| `plan-add`     | `/0k:plan-add`     | Add a new step to an existing `PLAN.md` while preserving the format.                     |
-| `plan-execute` | `/0k:plan-execute` | Autonomously run all remaining plan steps — implement, commit, repeat — until the plan is complete. |
+| `plan-init`    | `/kata:plan-init`    | Fetch a GitHub issue, design step-by-step implementation, write `PLAN.md`, commit, and open a draft PR. |
+| `plan-add`     | `/kata:plan-add`     | Add a new step to an existing `PLAN.md` while preserving the format.                     |
+| `plan-execute` | `/kata:plan-execute` | Autonomously run all remaining plan steps — implement, commit, repeat — until the plan is complete. |
 
 ### Refinement & feedback
 
 | Skill           | Invocation          | Purpose                                                                                                                 |
 | --------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `refine`        | `/0k:refine`        | Brainstorm and refine a GitHub issue into a concrete spec before any code is written. Use this before any creative work. |
-| `fix`           | `/0k:fix`           | Address unresolved feedback on a PR **or** an issue — routes to `fix-pr` or `fix-issue`.                                |
-| `fix-pr`        | `/0k:fix-pr`        | Address unresolved review comments on a pull request — verify before implementing, push back when technically wrong, commit through `/0k:commit`. |
-| `fix-issue`     | `/0k:fix-issue`     | Address unresolved comments on a GitHub issue — update description, reply to feedback, mark addressed with 👀.          |
-| `address`       | `/0k:address`       | Alias for `/0k:fix`.                                                                                                    |
-| `address-pr`    | `/0k:address-pr`    | Alias for `/0k:fix-pr`.                                                                                                 |
-| `address-issue` | `/0k:address-issue` | Alias for `/0k:fix-issue`.                                                                                              |
+| `refine`        | `/kata:refine`        | Brainstorm and refine a GitHub issue into a concrete spec before any code is written. Use this before any creative work. |
+| `fix`           | `/kata:fix`           | Address unresolved feedback on a PR **or** an issue — routes to `fix-pr` or `fix-issue`.                                |
+| `fix-pr`        | `/kata:fix-pr`        | Address unresolved review comments on a pull request — verify before implementing, push back when technically wrong, commit through `/kata:commit`. |
+| `fix-issue`     | `/kata:fix-issue`     | Address unresolved comments on a GitHub issue — update description, reply to feedback, mark addressed with 👀.          |
+| `address`       | `/kata:address`       | Alias for `/kata:fix`.                                                                                                    |
+| `address-pr`    | `/kata:address-pr`    | Alias for `/kata:fix-pr`.                                                                                                 |
+| `address-issue` | `/kata:address-issue` | Alias for `/kata:fix-issue`.                                                                                              |
 
 ## References
 
@@ -109,7 +109,7 @@ Static reference material consumed by skills lives under `references/`:
 - **`references/PLAN_FORMAT.md`** — canonical structure for `PLAN.md` files,
   shared by every `plan-*` skill.
 - **`references/templates/`** — GitHub issue templates used by
-  `/0k:create-issue`:
+  `/kata:create-issue`:
 
   | File                | Purpose                                        |
   | ------------------- | ---------------------------------------------- |

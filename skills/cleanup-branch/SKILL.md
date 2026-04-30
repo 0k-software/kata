@@ -184,7 +184,7 @@ Done. Rewrote 7 commits → 3 clean commits.
 Net diff is unchanged (430 lines across 5 files).
 
 If this branch is too large for a single PR, run:
-  /0k:split-branch
+  /kata:split-branch
 ```
 
 If the branch has already been pushed, remind the user that they'll need to
