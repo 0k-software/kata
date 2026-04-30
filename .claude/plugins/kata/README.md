@@ -105,20 +105,13 @@ Static reference material consumed by skills lives under `references/`:
 
 - **`references/PLAN_FORMAT.md`** — canonical structure for `PLAN.md` files,
   shared by every `plan-*` skill.
-- **`references/templates/`** — GitHub issue templates used by
-  `/kata:create-issue`:
 
-  | File                | Purpose                                        |
-  | ------------------- | ---------------------------------------------- |
-  | `1-pitch.yml`       | Propose a new project                          |
-  | `2-feature.yml`     | New feature request                            |
-  | `3-task.yml`        | Infrastructure, migration, or setup work       |
-  | `4-bug.yml`         | Bug report with severity                       |
-  | `5-enhancement.yml` | Refactor, DevX, or performance improvement     |
-  | `6-kickoff.yml`     | Pre-flight checklist before starting a project |
-
-  Templates are tailored for an **Elixir/Phoenix** stack (Phoenix, Ecto, Oban,
-  Backpex, PhoenixTest).
+GitHub issue templates used by `/kata:create-issue` and `/kata:refine` are
+**not** mirrored in this repo. They are fetched on demand from the canonical
+source —
+[`0k-software/.github/.github/ISSUE_TEMPLATE/`](https://github.com/0k-software/.github/tree/main/.github/ISSUE_TEMPLATE)
+— so the skills always see what GitHub's "New Issue" UI shows. Edit templates
+there, not here.
 
 ## Repository layout
 
@@ -139,8 +132,7 @@ Static reference material consumed by skills lives under `references/`:
 │   ├── hooks/session-start.sh
 │   └── plugins/kata/        staged plugin copy (committed; plugin content only)
 ├── references/
-│   ├── PLAN_FORMAT.md       PLAN.md schema used by plan-* skills
-│   └── templates/           1-pitch.yml … 6-kickoff.yml
+│   └── PLAN_FORMAT.md       PLAN.md schema used by plan-* skills
 └── skills/
     ├── commit/              SKILL.md
     ├── create-issue/        SKILL.md

@@ -18,13 +18,27 @@ standardized templates. Do NOT create free-form issues.
 2. **Identify the target repo.** Derive it from the current working directory's
    git remote (look for an `0k-software/` remote). If the current directory is
    not an 0k-software repo, ask the user which repo to use.
-3. **Determine the issue type** from the description. Read all template files
-   in `references/templates/` — each file's `name` and `description` fields
-   describe the issue type it covers. Match the user's intent to the best
-   fitting template. If ambiguous, present the user with the options and ask
-   them to pick.
-4. **Read the chosen template file** to understand the exact fields and
-   structure required for that issue type.
+3. **Fetch every available template** from the canonical
+   [`0k-software/.github/.github/ISSUE_TEMPLATE/`](https://github.com/0k-software/.github/tree/main/.github/ISSUE_TEMPLATE)
+   — never hard-code the list, so new templates are picked up automatically:
+
+   ```bash
+   TOKEN="${GITHUB_TOKEN:-${GH_TOKEN:-$(gh auth token 2>/dev/null || true)}}"
+   curl -fsSL -H "Authorization: Bearer $TOKEN" \
+     "https://api.github.com/repos/0k-software/.github/contents/.github/ISSUE_TEMPLATE" \
+     | jq -r '.[] | select(.name | endswith(".yml")) | .download_url' \
+     | while read -r url; do
+         echo "=== $url ==="
+         curl -fsSL "$url"
+         echo
+       done
+   ```
+
+4. **Pick the matching template.** Each fetched file has `name`, `description`,
+   and `type` fields that describe the issue type it covers. Match the user's
+   intent to the best fit. If ambiguous, present the candidates to the user and
+   ask them to pick. Use the chosen file's full YAML for the next step.
+
 5. **Populate fields** from the user's description (`$ARGUMENTS`):
    - The **title** is always sourced from `$ARGUMENTS` (verbatim or lightly
      cleaned for conciseness).

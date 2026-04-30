@@ -100,10 +100,28 @@ plan-init.
 
 **Understanding the idea:**
 
-- Fetch the issue (title, body, issue type) and load the matching type template
-  from `references/templates/`. The issue title and body are the primary
-  description of what is being built — they set the starting scope and intent
-  for everything that follows. After fetching, apply the `in progress` label:
+- Fetch the issue (title, body, issue type), then load the matching template
+  from the canonical
+  [`0k-software/.github/.github/ISSUE_TEMPLATE/`](https://github.com/0k-software/.github/tree/main/.github/ISSUE_TEMPLATE).
+  List the directory and pick the file whose `type` (or `name`) matches the
+  issue's type — never hard-code filenames, so new templates work
+  automatically:
+
+  ```bash
+  TOKEN="${GITHUB_TOKEN:-${GH_TOKEN:-$(gh auth token 2>/dev/null || true)}}"
+  curl -fsSL -H "Authorization: Bearer $TOKEN" \
+    "https://api.github.com/repos/0k-software/.github/contents/.github/ISSUE_TEMPLATE" \
+    | jq -r '.[] | select(.name | endswith(".yml")) | .download_url' \
+    | while read -r url; do
+        echo "=== $url ==="
+        curl -fsSL "$url"
+        echo
+      done
+  ```
+
+  The issue title and body are the primary description of what is being built —
+  they set the starting scope and intent for everything that follows. After
+  fetching, apply the `in progress` label:
 
   ```bash
   remote_url=$(git remote get-url origin)
