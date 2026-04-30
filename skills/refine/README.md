@@ -6,4 +6,4 @@ Adapted from [`obra/superpowers`](https://github.com/obra/superpowers) —
 
 The upstream skill was copied verbatim and then evolved to match 0k
 conventions: fetch the GitHub issue as starting context, write the approved
-design back to the issue body, and route all commits through `/0k:commit`.
+design back to the issue body, and route all commits through `/kata:commit`.

@@ -30,7 +30,7 @@ migrations together").
    git merge-base --is-ancestor origin/$BASE HEAD
    ```
    If the check fails (exit code non-zero), abort and tell the user:
-   > "Your branch is not rebased on top of `$BASE`. Run `/0k:rebase $BASE`
+   > "Your branch is not rebased on top of `$BASE`. Run `/kata:rebase $BASE`
    > first, then try again."
 4. Get the current branch name: `git rev-parse --abbrev-ref HEAD`.
 5. List all commits to be split:

@@ -42,7 +42,7 @@ Run every remaining step in PLAN.md, one after another, until none are left.
 4. For each task in the `TodoWrite` list (in order):
    - Implement the step.
    - Mark the step as done (`- [x]`) in the PLAN.md TOC.
-   - Invoke the `/0k:commit` skill with the `!` flag, passing the step
+   - Invoke the `/kata:commit` skill with the `!` flag, passing the step
      title/description as context.
    - If the implementation required any deviation from the original step
      description (different approach, scope change, discovered constraints),
@@ -62,7 +62,7 @@ remain).
 **After all steps are complete:**
 
 1. Run `git rm PLAN.md` to remove the working artifact.
-2. Commit the removal using `/0k:commit`.
+2. Commit the removal using `/kata:commit`.
 3. Run `gh pr ready` to mark the current branch's PR as ready for review.
 4. Push the final commit.
 5. Run `gh pr edit --add-reviewer "@copilot"` to request a fresh Copilot review
