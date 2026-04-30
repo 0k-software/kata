@@ -131,8 +131,8 @@ Static reference material consumed by skills lives under `references/`:
 ├── .prettierrc.yml          markdown formatting rules
 ├── Makefile                 release target
 ├── bin/
-│   └── sync-plugin          syncs .claude/plugins/kata/ with repo root
-├── .claude/plugins/kata/    staged plugin copy (committed; in sync with root)
+│   └── sync-plugin          stages plugin content under .claude/plugins/kata/
+├── .claude/plugins/kata/    staged plugin copy (committed; plugin content only)
 ├── references/
 │   ├── PLAN_FORMAT.md       PLAN.md schema used by plan-* skills
 │   └── templates/           1-pitch.yml … 6-kickoff.yml

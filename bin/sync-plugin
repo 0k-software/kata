@@ -14,15 +14,22 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 STAGE_DIR="$ROOT/.claude/plugins/kata"
 
-# Top-level entries to skip when staging — .git is the repo metadata and
-# .claude contains the stage dir itself (would recurse).
+# Top-level entries to skip when staging. Anything not in the plugin proper:
+# repo metadata (.git), the stage dir itself (.claude — would recurse), CI
+# config (.github), dev tooling (bin, Makefile, .prettierrc.yml), and the
+# legacy local-dev marketplace (dev, kept for safety even after removal).
+SKIP=(.git .claude .github bin dev Makefile .prettierrc.yml)
+
 sync_stage() {
   local dest="$1"
+  local find_args=()
+  local entry
+  for entry in "${SKIP[@]}"; do
+    find_args+=(-not -name "$entry")
+  done
   rm -rf "$dest"
   mkdir -p "$dest"
-  find "$ROOT" -mindepth 1 -maxdepth 1 \
-    -not -name .git \
-    -not -name .claude \
+  find "$ROOT" -mindepth 1 -maxdepth 1 "${find_args[@]}" \
     -exec cp -a {} "$dest/" \;
 }
 
