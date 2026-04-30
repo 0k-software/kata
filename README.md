@@ -1,6 +1,6 @@
-# 0k — Claude Code Plugin
+# kata — Claude Code Plugin
 
-The 0k Claude Code plugin: a curated set of skills and references that
+The kata Claude Code plugin: a curated set of skills and references that
 encode the 0k-software development workflow — issue creation, PR review,
 plan-driven implementation, branch hygiene, and a few quality-of-life
 helpers.
