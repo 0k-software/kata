@@ -1,0 +1,12 @@
+{
+  "name": "0k-software-dev",
+  "owner": {
+    "name": "0k-software"
+  },
+  "plugins": [
+    {
+      "name": "kata-dev",
+      "source": "./kata"
+    }
+  ]
+}
