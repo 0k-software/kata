@@ -1,17 +1,16 @@
 # kata — Claude Code Plugin
 
-The kata Claude Code plugin: a curated set of skills and references that
-encode the 0k-software development workflow — issue creation, PR review,
-plan-driven implementation, branch hygiene, and a few quality-of-life
-helpers.
+The kata Claude Code plugin: a curated set of skills and references that encode
+the 0k-software development workflow — issue creation, PR review, plan-driven
+implementation, branch hygiene, and a few quality-of-life helpers.
 
 This repository **is** the plugin. Its root is the plugin root, with
-`.claude-plugin/plugin.json` declaring the manifest. Claude Code installs
-it directly from this repo via the marketplace mechanism (see
+`.claude-plugin/plugin.json` declaring the manifest. Claude Code installs it
+directly from this repo via the marketplace mechanism (see
 [Installing](#installing-the-plugin) below).
 
-> Previously hosted at `0k-software/.github/0k`. This repo is now the
-> canonical home; the install path has changed accordingly.
+> Previously hosted at `0k-software/.github/0k`. This repo is now the canonical
+> home; the install path has changed accordingly.
 
 ## Installing the plugin
 
@@ -32,8 +31,8 @@ Once installed, every skill is available as `/kata:<skill-name>`.
 
 ### Enabling across an org's projects
 
-Add this to a project's `.claude/settings.json` to register the marketplace
-and auto-enable the plugin for everyone who opens the project:
+Add this to a project's `.claude/settings.json` to register the marketplace and
+auto-enable the plugin for everyone who opens the project:
 
 ```json
 {
@@ -51,10 +50,10 @@ and auto-enable the plugin for everyone who opens the project:
 }
 ```
 
-This is the standard Claude Code mechanism for distributing plugins to a
-team — no custom scripts or hooks required. Claude Code handles
-installation and updates automatically. See the
-[plugin marketplaces docs][cc-plugin-marketplaces] for details.
+This is the standard Claude Code mechanism for distributing plugins to a team —
+no custom scripts or hooks required. Claude Code handles installation and
+updates automatically. See the [plugin marketplaces
+docs][cc-plugin-marketplaces] for details.
 
 [cc-plugin-marketplaces]:
   https://docs.claude.com/en/docs/claude-code/plugin-marketplaces
@@ -67,40 +66,39 @@ invoked from a Claude Code session as `/kata:<skill-name>`.
 
 ### Workflow
 
-| Skill            | Invocation           | Purpose                                                                                                              |
-| ---------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Skill            | Invocation             | Purpose                                                                                                                                    |
+| ---------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | `commit`         | `/kata:commit`         | Stage all changes (staged, unstaged, untracked) and generate a Conventional Commit. Use `!` prefix to auto-fix errors instead of aborting. |
-| `create-issue`   | `/kata:create-issue`   | Create a GitHub issue in an 0k-software repo using the standardized templates (pitch, feature, task, bug, enhancement, kickoff). |
-| `create-pr`      | `/kata:create-pr`      | Open a pull request for the current branch with consistent formatting and automatic issue linking. Pass `draft` to open as a draft. |
-| `rebase`         | `/kata:rebase`         | Rebase current branch onto another, handling pre-commit hook failures. `/kata:rebase!` auto-resolves conflicts where safe. |
-| `cleanup-branch` | `/kata:cleanup-branch` | Squash back-and-forth, WIP, and fixup commits into a clean, reviewable history — without changing the final diff.    |
-| `split-branch`   | `/kata:split-branch`   | Split a large branch into smaller stacked branches (≤500 changed lines each) so PRs are easier to review.            |
-| `kitty`          | `/kata:kitty`          | Open or activate a [kitty](https://sw.kovidgoyal.net/kitty/) terminal in the current directory.                      |
+| `create-issue`   | `/kata:create-issue`   | Create a GitHub issue in an 0k-software repo using the standardized templates (pitch, feature, task, bug, enhancement, kickoff).           |
+| `create-pr`      | `/kata:create-pr`      | Open a pull request for the current branch with consistent formatting and automatic issue linking. Pass `draft` to open as a draft.        |
+| `rebase`         | `/kata:rebase`         | Rebase current branch onto another, handling pre-commit hook failures. `/kata:rebase!` auto-resolves conflicts where safe.                 |
+| `cleanup-branch` | `/kata:cleanup-branch` | Squash back-and-forth, WIP, and fixup commits into a clean, reviewable history — without changing the final diff.                          |
+| `split-branch`   | `/kata:split-branch`   | Split a large branch into smaller stacked branches (≤500 changed lines each) so PRs are easier to review.                                  |
+| `kitty`          | `/kata:kitty`          | Open or activate a [kitty](https://sw.kovidgoyal.net/kitty/) terminal in the current directory.                                            |
 
 ### Plan-driven implementation
 
-These skills cooperate around a `PLAN.md` file at the repo root. The
-canonical schema lives in
-[`references/PLAN_FORMAT.md`](references/PLAN_FORMAT.md) — every plan-* skill
-reads it before acting.
+These skills cooperate around a `PLAN.md` file at the repo root. The canonical
+schema lives in [`references/PLAN_FORMAT.md`](references/PLAN_FORMAT.md) —
+every plan-\* skill reads it before acting.
 
-| Skill          | Invocation         | Purpose                                                                                  |
-| -------------- | ------------------ | ---------------------------------------------------------------------------------------- |
+| Skill          | Invocation           | Purpose                                                                                                 |
+| -------------- | -------------------- | ------------------------------------------------------------------------------------------------------- |
 | `plan-init`    | `/kata:plan-init`    | Fetch a GitHub issue, design step-by-step implementation, write `PLAN.md`, commit, and open a draft PR. |
-| `plan-add`     | `/kata:plan-add`     | Add a new step to an existing `PLAN.md` while preserving the format.                     |
-| `plan-execute` | `/kata:plan-execute` | Autonomously run all remaining plan steps — implement, commit, repeat — until the plan is complete. |
+| `plan-add`     | `/kata:plan-add`     | Add a new step to an existing `PLAN.md` while preserving the format.                                    |
+| `plan-execute` | `/kata:plan-execute` | Autonomously run all remaining plan steps — implement, commit, repeat — until the plan is complete.     |
 
 ### Refinement & feedback
 
-| Skill           | Invocation          | Purpose                                                                                                                 |
-| --------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `refine`        | `/kata:refine`        | Brainstorm and refine a GitHub issue into a concrete spec before any code is written. Use this before any creative work. |
-| `fix`           | `/kata:fix`           | Address unresolved feedback on a PR **or** an issue — routes to `fix-pr` or `fix-issue`.                                |
+| Skill           | Invocation            | Purpose                                                                                                                                             |
+| --------------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `refine`        | `/kata:refine`        | Brainstorm and refine a GitHub issue into a concrete spec before any code is written. Use this before any creative work.                            |
+| `fix`           | `/kata:fix`           | Address unresolved feedback on a PR **or** an issue — routes to `fix-pr` or `fix-issue`.                                                            |
 | `fix-pr`        | `/kata:fix-pr`        | Address unresolved review comments on a pull request — verify before implementing, push back when technically wrong, commit through `/kata:commit`. |
-| `fix-issue`     | `/kata:fix-issue`     | Address unresolved comments on a GitHub issue — update description, reply to feedback, mark addressed with 👀.          |
-| `address`       | `/kata:address`       | Alias for `/kata:fix`.                                                                                                    |
-| `address-pr`    | `/kata:address-pr`    | Alias for `/kata:fix-pr`.                                                                                                 |
-| `address-issue` | `/kata:address-issue` | Alias for `/kata:fix-issue`.                                                                                              |
+| `fix-issue`     | `/kata:fix-issue`     | Address unresolved comments on a GitHub issue — update description, reply to feedback, mark addressed with 👀.                                      |
+| `address`       | `/kata:address`       | Alias for `/kata:fix`.                                                                                                                              |
+| `address-pr`    | `/kata:address-pr`    | Alias for `/kata:fix-pr`.                                                                                                                           |
+| `address-issue` | `/kata:address-issue` | Alias for `/kata:fix-issue`.                                                                                                                        |
 
 ## References
 
@@ -120,8 +118,8 @@ Static reference material consumed by skills lives under `references/`:
   | `5-enhancement.yml` | Refactor, DevX, or performance improvement     |
   | `6-kickoff.yml`     | Pre-flight checklist before starting a project |
 
-  Templates are tailored for an **Elixir/Phoenix** stack (Phoenix, Ecto,
-  Oban, Backpex, PhoenixTest).
+  Templates are tailored for an **Elixir/Phoenix** stack (Phoenix, Ecto, Oban,
+  Backpex, PhoenixTest).
 
 ## Repository layout
 
@@ -129,6 +127,14 @@ Static reference material consumed by skills lives under `references/`:
 .
 ├── .claude-plugin/
 │   └── plugin.json          plugin manifest (name, version, author, license)
+├── .github/workflows/
+│   └── check.yml            CI: prettier markdown check
+├── .prettierrc.yml          markdown formatting rules
+├── Makefile                 install-plugin / uninstall-plugin / release targets
+├── dev/
+│   ├── .claude-plugin/
+│   │   └── marketplace.json local-dev marketplace (kata-dev@0k-software-dev)
+│   └── kata -> ..           symlink to repo root (the plugin source)
 ├── references/
 │   ├── PLAN_FORMAT.md       PLAN.md schema used by plan-* skills
 │   └── templates/           1-pitch.yml … 6-kickoff.yml
@@ -154,35 +160,55 @@ Static reference material consumed by skills lives under `references/`:
 
 ## Contributing
 
-Skills are plain Markdown — open the relevant `skills/<name>/SKILL.md`,
-edit the frontmatter and body, and submit a PR. The frontmatter
-`description` is what Claude Code uses to decide when a skill is relevant,
-so keep it sharp and trigger-rich.
+Skills are plain Markdown — open the relevant `skills/<name>/SKILL.md`, edit
+the frontmatter and body, and submit a PR. The frontmatter `description` is
+what Claude Code uses to decide when a skill is relevant, so keep it sharp and
+trigger-rich.
 
-Useful local checks:
+### Local install for development
+
+Install the plugin from your working copy under a separate
+`kata-dev@0k-software-dev` identity, so it doesn't clobber any published
+`kata@0k-software` install you may have:
 
 ```sh
-npx prettier --check "**/*.md"   # Markdown formatting
+make install-plugin
+```
+
+This registers the local marketplace under `dev/` and installs `kata-dev`.
+Re-running picks up updates. To remove it:
+
+```sh
+make uninstall-plugin
+```
+
+### Local checks
+
+```sh
+npx prettier --check "**/*.md"   # Markdown formatting (matches CI)
 npx prettier --write "**/*.md"   # auto-fix
 ```
 
-To iterate interactively, open a Claude Code session in this repo and
-invoke the skill — edits to `SKILL.md` are picked up on the next call.
+CI runs the same prettier check on every PR via
+[`.github/workflows/check.yml`](.github/workflows/check.yml).
+
+To iterate interactively, open a Claude Code session in this repo and invoke
+the skill — edits to `SKILL.md` are picked up on the next call.
 
 ## Releasing a new version
 
-1. Bump `version` in [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json).
-2. Commit and push.
-3. Tag the commit with the matching version (e.g. `v1.1.0`) and publish a
-   GitHub release. Claude Code picks up the new version on its next
+1. Bump `version` in [`.claude-plugin/plugin.json`](.claude-plugin/plugin.json)
+   and commit.
+2. Run `make release`. This validates the working tree is clean, creates and
+   pushes the `v$VERSION` tag, and publishes a GitHub release with
+   auto-generated notes. Claude Code picks up the new version on its next
    `/plugin update` check.
 
 ## Attribution
 
-Several skills in this plugin are heavily inspired by — and in parts
-directly copied from —
-[obra/superpowers](https://github.com/obra/superpowers). Used with
-gratitude and in compliance with their license.
+Several skills in this plugin are heavily inspired by — and in parts directly
+copied from — [obra/superpowers](https://github.com/obra/superpowers). Used
+with gratitude and in compliance with their license.
 
 ## License
 
