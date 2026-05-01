@@ -10,16 +10,5 @@
         ]
       }
     ]
-  },
-  "extraKnownMarketplaces": {
-    "kata-dev": {
-      "source": {
-        "source": "directory",
-        "path": "."
-      }
-    }
-  },
-  "enabledPlugins": {
-    "kata@kata-dev": true
   }
 }
