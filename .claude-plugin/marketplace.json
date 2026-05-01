@@ -1,0 +1,14 @@
+{
+  "name": "kata-dev",
+  "description": "Local dev marketplace for the kata plugin — installs from this working copy",
+  "owner": { "name": "0k-software" },
+  "plugins": [
+    {
+      "name": "kata",
+      "description": "Send your coding agents to the dojo to earn their belt: make them learn to fight for a better software development process.",
+      "version": "0.1.0",
+      "source": "./",
+      "author": { "name": "0k-software" }
+    }
+  ]
+}

@@ -12,14 +12,14 @@
     ]
   },
   "extraKnownMarketplaces": {
-    "0k-plugins": {
+    "kata-dev": {
       "source": {
-        "source": "github",
-        "repo": "0k-software/0k-plugins"
+        "source": "directory",
+        "path": "."
       }
     }
   },
   "enabledPlugins": {
-    "kata@0k-plugins": true
+    "kata@kata-dev": true
   }
 }
